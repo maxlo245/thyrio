@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Dégradé moitié noir / moitié blanc avec léger angle */
+    background: linear-gradient(120deg, #050505 0%, #151515 45%, #f5f5f5 100%);
+    background-attachment: fixed;
+    color: #f5f5f5;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+}
+
+nav a {
+    color: #f5f5f5;
+    margin-right: 1rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    min-height: 100vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Bloc principal : fond semi-transparent flouté pour l'effet "alt" */
+main > * {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+}
+
+h2, h3 {
+    margin-top: 0;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.product {
+    background: linear-gradient(145deg, rgba(0,0,0,0.85), rgba(40,40,40,0.9));
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.2rem;
+    width: 260px;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.5);
+    color: #f7f7f7;
+}
+
+.product h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.product p {
+    margin: 0.2rem 0 0.4rem;
+}
+
+.product a {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+table th,
+table td {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+}
+
+table th {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+table td {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+    padding: 0.5rem 1.3rem;
+    background: #000;
+    color: #fff;
+    border-radius: 999px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: #fff;
+    color: #000;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"] {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.7rem;
+    box-sizing: border-box;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.45);
+    color: #f5f5f5;
+}
+
+form input::placeholder {
+    color: #aaaaaa;
+}

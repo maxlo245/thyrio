@@ -1,0 +1,11 @@
+{
+  "name": "paiement-vercel-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node api/create-payment-intent.js"
+  },
+  "dependencies": {
+    "stripe": "^16.0.0"
+  }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Boutique – Paiement Stripe (Vercel)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://js.stripe.com/v3"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 1.5rem; background:#f5f5f5; }
+    h1 { margin-top: 0; }
+    .box { background:#fff; padding:1rem; border:1px solid #ddd; max-width:480px; }
+    label { display:block; margin-bottom:0.5rem; }
+    input[type="number"], select { width:100%; padding:0.4rem; margin-top:0.2rem; margin-bottom:0.6rem; box-sizing:border-box; }
+    button { padding:0.5rem 1rem; background:#007bff; color:#fff; border:none; cursor:pointer; }
+    button:hover { background:#0056b3; }
+    #card-element { padding:0.5rem; border:1px solid #ccc; background:#fff; margin-bottom:0.5rem; }
+    #card-errors { color:red; min-height:1.2rem; }
+    #status { margin-top:0.5rem; min-height:1.2rem; }
+  </style>
+</head>
+<body>
+<h1>Paiement Stripe (API Vercel)</h1>
+<div class="box">
+  <p>Exemple simplifié pour ton futur site de dropshipping : le frontend appelle l'API Vercel pour créer un PaymentIntent Stripe, puis confirme le paiement côté client.</p>
+
+  <form id="checkout-form">
+    <label>Montant (en euros)
+      <input type="number" id="amount" value="10" min="1" step="0.50" required />
+    </label>
+
+    <label>Devise
+      <select id="currency">
+        <option value="eur">EUR</option>
+        <option value="usd">USD</option>
+      </select>
+    </label>
+
+    <label>Données carte (Stripe Elements)</label>
+    <div id="card-element"></div>
+    <div id="card-errors"></div>
+
+    <button type="submit">Payer</button>
+    <div id="status"></div>
+  </form>
+</div>
+
+<div class="box" style="margin-top:1.5rem;">
+  <h2>Ou payer directement sur Shopify</h2>
+  <p>
+    Quand ta boutique Shopify sera prête, remplace simplement l'URL ci-dessous
+    par le lien de ton produit ou de ton checkout Shopify.
+  </p>
+  <p>
+    <a id="shopify-checkout-btn"
+       href="https://TON-DOMAIN.myshopify.com/products/mon-produit"
+       style="display:inline-block;padding:0.6rem 1.2rem;background:#16a34a;color:#fff;text-decoration:none;border-radius:4px;">
+      Acheter sur ma boutique Shopify
+    </a>
+  </p>
+</div>
+
+<script>
+  // REMPLACE CETTE VALEUR PAR TA CLÉ PUBLIQUE STRIPE
+  const STRIPE_PUBLIC_KEY = "pk_test_votre_clef_publique_ici";
+
+  const stripe = Stripe(STRIPE_PUBLIC_KEY);
+  const elements = stripe.elements();
+  const card = elements.create('card');
+  card.mount('#card-element');
+
+  const form = document.getElementById('checkout-form');
+  const cardErrors = document.getElementById('card-errors');
+  const status = document.getElementById('status');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    cardErrors.textContent = '';
+    status.textContent = '';
+
+    const amountEuros = parseFloat(document.getElementById('amount').value || '0');
+    if (!amountEuros || amountEuros <= 0) {
+      cardErrors.textContent = 'Montant invalide.';
+      return;
+    }
+
+    const amountCents = Math.round(amountEuros * 100);
+    const currency = document.getElementById('currency').value || 'eur';
+
+    try {
+      // 1) Appeler l'API Vercel pour créer un PaymentIntent
+      const res = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: amountCents, currency })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Erreur lors de la création du PaymentIntent');
+      }
+
+      const clientSecret = data.clientSecret;
+
+      // 2) Confirmer le paiement côté client avec la carte
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card
+        }
+      });
+
+      if (error) {
+        cardErrors.textContent = error.message;
+        return;
+      }
+
+      if (paymentIntent && paymentIntent.status === 'succeeded') {
+        status.style.color = 'green';
+        status.textContent = 'Paiement réussi !';
+      } else {
+        status.style.color = 'red';
+        status.textContent = 'Paiement non complété.';
+      }
+    } catch (e) {
+      console.error(e);
+      status.style.color = 'red';
+      status.textContent = e.message || 'Erreur inattendue.';
+    }
+  });
+</script>
+</body>
+</html>
