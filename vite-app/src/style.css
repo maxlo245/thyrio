@@ -20,25 +20,98 @@ body {
   color: #f5f5f5;
 }
 
-.page {
+.shell {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem;
-  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.brand-text {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #f5f5f5;
+  cursor: pointer;
+}
+
+.nav-link.active {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.nav-link:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.page {
+  flex: 1;
+  padding: 2.5rem 3rem 3.5rem;
+}
+
+.page-section {
+  display: none;
+}
+
+.page-section:not(.hidden) {
+  display: block;
 }
 
 .panel {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 680px;
 }
 
 .panel-left {
-  padding: 2rem;
+  padding: 2.5rem 0;
 }
 
-.panel-right {
+.panel-right,
+.panel-full {
   padding: 2rem;
 }
 
@@ -131,16 +204,21 @@ button:hover {
 }
 
 @media (max-width: 900px) {
+  .shell {
+    min-height: 100vh;
+  }
+
+  .site-header {
+    padding: 0.75rem 1.25rem;
+  }
+
   .page {
-    grid-template-columns: 1fr;
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.25rem 2.5rem;
   }
 
-  .panel-left {
-    order: 2;
-  }
-
-  .panel-right {
-    order: 1;
+  .panel-left,
+  .panel-right,
+  .panel-full {
+    padding: 1.5rem 0.5rem;
   }
 }
