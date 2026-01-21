@@ -65,7 +65,8 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 2.5rem 1.5rem 3rem;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.92);
+    color: #181818;
     border-radius: 18px;
     box-shadow: 0 8px 32px #00ffe722;
     animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1);
