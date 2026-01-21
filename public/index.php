@@ -34,6 +34,14 @@ switch ($page) {
         $controller = new AuthController();
         $controller->register();
         break;
+    case 'about':
+        // Page de présentation
+        $title = 'Présentation';
+        ob_start();
+        require __DIR__ . '/../templates/about.php';
+        $content = ob_get_clean();
+        require __DIR__ . '/../templates/layout.php';
+        break;
     default:
         require __DIR__ . '/../src/controllers/ProductController.php';
         $controller = new ProductController();

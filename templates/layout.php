@@ -18,6 +18,7 @@
     </div>
     <nav>
         <a href="index.php?page=home">Accueil</a>
+        <a href="index.php?page=about">Présentation</a>
         <a href="index.php?page=cart">Panier</a>
         <a href="index.php?page=login">Connexion</a>
     </nav>
