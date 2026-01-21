@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($title ?? 'Boutique en ligne') ?></title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="public/swup-animations.css">
     <!-- Swup CDN -->
     <script src="https://unpkg.com/swup@4.6.2/dist/swup.min.js"></script>
 </head>
@@ -30,7 +31,9 @@
     <p>&copy; <?= date('Y') ?> - Ma boutique</p>
 </footer>
 <script>
-    const swup = new Swup();
+    const swup = new Swup({
+        // Optionnel : on peut ajouter des hooks JS ici pour effets avancés
+    });
 </script>
 </body>
 </html>
