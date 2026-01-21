@@ -1,5 +1,15 @@
 {
   "version": 2,
   "buildCommand": "cd vite-app && npm install && npm run build",
-  "outputDirectory": "vite-app/dist"
+  "outputDirectory": "vite-app/dist",
+  "rewrites": [
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/cart", "destination": "/cart.html" },
+    { "source": "/checkout", "destination": "/checkout.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/product_detail", "destination": "/product_detail.html" },
+    { "source": "/home", "destination": "/home.html" },
+    { "source": "/", "destination": "/index.html" }
+  ]
 }
