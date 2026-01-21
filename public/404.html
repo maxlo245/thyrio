@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Page non trouvée - Thyrio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="swup-animations.css">
+  <script src="https://unpkg.com/swup@4.6.2/dist/swup.min.js"></script>
+</head>
+<body>
+<header>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <img src="images/logo.png" alt="Logo" style="width:60px;height:60px;border-radius:50%;background:#000;object-fit:cover;" />
+    <h1>Boutique en ligne</h1>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="about.html">Présentation</a>
+    <a href="cart.html">Panier</a>
+    <a href="login.html">Connexion</a>
+  </nav>
+</header>
+<div id="swup" class="transition-fade">
+  <main>
+    <section class="notfound-section">
+      <h2>404 - Page non trouvée</h2>
+      <p>La page demandée n'existe pas.</p>
+    </section>
+  </main>
+</div>
+<footer>
+  <p>&copy; 2026 - Ma boutique</p>
+</footer>
+<script>const swup = new Swup({});</script>
+</body>
+</html>

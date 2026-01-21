@@ -1,0 +1,12 @@
+{
+  "name": "thyrio",
+  "version": "1.0.0",
+  "description": "Site Thyrio migré en Node.js/Express avec animations HTML/CSS/JS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

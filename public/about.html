@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Présentation - Thyrio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="swup-animations.css">
+  <script src="https://unpkg.com/swup@4.6.2/dist/swup.min.js"></script>
+</head>
+<body>
+<header>
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <img src="images/logo.png" alt="Logo" style="width:60px;height:60px;border-radius:50%;background:#000;object-fit:cover;" />
+    <h1>Boutique en ligne</h1>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="about.html">Présentation</a>
+    <a href="cart.html">Panier</a>
+    <a href="login.html">Connexion</a>
+  </nav>
+</header>
+<div id="swup" class="transition-fade">
+  <main>
+    <!-- Début contenu about -->
+    <section class="about-section">
+      <h2>À propos de Thyrio</h2>
+      <p class="about-intro">
+        Bienvenue sur <strong>Thyrio</strong>, votre boutique en ligne nouvelle génération !<br>
+        Notre mission : offrir une expérience d’achat unique, moderne et sécurisée, portée par la technologie et la passion du service client.
+      </p>
+      <div class="about-content">
+        <img src="images/logo.png" alt="Logo Thyrio" class="about-logo">
+        <ul class="about-values">
+          <li>Large choix de produits sélectionnés</li>
+          <li>Paiement rapide et sécurisé</li>
+          <li>Interface moderne et animations uniques</li>
+          <li>Support client réactif</li>
+        </ul>
+      </div>
+      <section class="about-story">
+        <h3>Notre histoire</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <strong>2024</strong> — Lancement de Thyrio, avec une vision : réinventer l’e-commerce.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <strong>2025</strong> — Première version publique, premiers clients, premiers retours enthousiastes !
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <strong>2026</strong> — Nouvelles fonctionnalités, animations uniques, et une communauté qui grandit.
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="about-team">
+        <h3>L’équipe Thyrio</h3>
+        <div class="team-list">
+          <div class="team-member">
+            <div class="avatar" style="background:#222;"></div>
+            <div class="name">Maxime</div>
+            <div class="role">Fondateur & Développeur</div>
+          </div>
+          <div class="team-member">
+            <div class="avatar" style="background:#222;"></div>
+            <div class="name">Sophie</div>
+            <div class="role">Design & Expérience</div>
+          </div>
+          <div class="team-member">
+            <div class="avatar" style="background:#222;"></div>
+            <div class="name">Lucas</div>
+            <div class="role">Support & Relation client</div>
+          </div>
+        </div>
+      </section>
+      <p class="about-thanks">
+        Merci de votre confiance et bonne visite sur Thyrio !
+      </p>
+    </section>
+    <!-- Fin contenu about -->
+  </main>
+</div>
+<footer>
+  <p>&copy; 2026 - Ma boutique</p>
+</footer>
+<script>
+  // Animation Swup avancée (copie du JS de layout.php)
+  const swup = new Swup({});
+  function animateTitle() {
+    const aboutTitle = document.querySelector('.about-section h2');
+    if (aboutTitle && !aboutTitle.classList.contains('animated-title')) {
+      const text = aboutTitle.textContent;
+      aboutTitle.innerHTML = '';
+      aboutTitle.classList.add('animated-title');
+      [...text].forEach((char, i) => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        aboutTitle.appendChild(span);
+        setTimeout(() => span.classList.add('visible'), 60 * i);
+      });
+    }
+  }
+  function createParticles() {
+    const logo = document.querySelector('img[alt="Logo"], img[alt="Logo Thyrio"]');
+    if (!logo) return;
+    let container = document.getElementById('logo-particles');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'logo-particles';
+      container.style.position = 'absolute';
+      container.style.pointerEvents = 'none';
+      container.style.left = 0;
+      container.style.top = 0;
+      container.style.width = '100vw';
+      container.style.height = '100vh';
+      document.body.appendChild(container);
+    }
+    container.innerHTML = '';
+    const rect = logo.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      const angle = (i / 18) * 2 * Math.PI;
+      const radius = 60 + Math.random() * 24;
+      p.style.position = 'absolute';
+      p.style.left = (centerX + Math.cos(angle) * radius) + 'px';
+      p.style.top = (centerY + Math.sin(angle) * radius) + 'px';
+      p.style.width = p.style.height = (6 + Math.random() * 6) + 'px';
+      p.style.borderRadius = '50%';
+      p.style.background = 'rgba(0,255,231,0.7)';
+      p.style.boxShadow = '0 0 16px #00ffe7cc';
+      p.style.opacity = 0.7 + 0.3 * Math.random();
+      p.style.transition = 'all 0.7s cubic-bezier(.77,0,.18,1)';
+      container.appendChild(p);
+    }
+    setTimeout(() => { if (container) container.innerHTML = ''; }, 900);
+  }
+  function glitchTitle() {
+    const aboutTitle = document.querySelector('.about-section h2');
+    if (!aboutTitle) return;
+    let glitchInterval = aboutTitle.getAttribute('data-glitch-interval');
+    if (glitchInterval) return;
+    glitchInterval = setInterval(() => {
+      if (Math.random() > 0.7) {
+        aboutTitle.style.transform = `skewX(${(Math.random()-0.5)*12}deg) translateX(${(Math.random()-0.5)*8}px)`;
+        aboutTitle.style.filter = 'contrast(1.5)';
+        aboutTitle.style.opacity = 0.7 + Math.random()*0.3;
+        setTimeout(() => {
+          aboutTitle.style.transform = '';
+          aboutTitle.style.filter = '';
+          aboutTitle.style.opacity = '';
+        }, 120 + Math.random()*120);
+      }
+    }, 350);
+    aboutTitle.setAttribute('data-glitch-interval', glitchInterval);
+  }
+  function addScanlines() {
+    if (document.getElementById('scanlines-bg')) return;
+    const scan = document.createElement('div');
+    scan.id = 'scanlines-bg';
+    scan.style.position = 'fixed';
+    scan.style.left = 0;
+    scan.style.top = 0;
+    scan.style.width = '100vw';
+    scan.style.height = '100vh';
+    scan.style.pointerEvents = 'none';
+    scan.style.zIndex = 1;
+    scan.style.background = 'repeating-linear-gradient(180deg, transparent, transparent 2px, rgba(0,255,231,0.08) 3px, transparent 4px)';
+    scan.style.opacity = 0.5;
+    scan.style.mixBlendMode = 'screen';
+    document.body.appendChild(scan);
+  }
+  function runAnimations() {
+    animateTitle();
+    createParticles();
+    glitchTitle();
+    addScanlines();
+  }
+  document.addEventListener('swup:contentReplaced', runAnimations);
+  window.addEventListener('DOMContentLoaded', runAnimations);
+</script>
+</body>
+</html>
